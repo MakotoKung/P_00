@@ -1,2 +1,2 @@
 
-    printf("%c",pos_map[x][y]);
+    //last show board game 

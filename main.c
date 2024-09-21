@@ -5,7 +5,7 @@
 
 
 int size =0 ;
-char pos_map[rows][cols] = {};
+char pos_map[rows][cols] ;
 
 char character(){
     
@@ -81,7 +81,7 @@ char Board_game(){
         printf("@@");
         
         for(int j = 0;j < cols-2;++j){
-            printf("%d %d \n",x,y);
+            printf("%c", pos_map[i][j]);
             
 
         }
@@ -103,58 +103,37 @@ int main(){
     int True = 0,r=0;
     int test ;
 
-     
-
     system("cls");
     if(menu() == 1){
         True = 1;
-        while (True = 1)
-        {
-            char space = ' ';
+        char space = ' ';
     //Show Board game 
-            for(int col = 0;col < cols+2;++col){
-                printf("@");
+        for(int col = 0;col < cols+2;++col){
+            printf("@");
+        }
+        printf("\n");
+        //In_board game 
+        for(int i= 0;i<rows;++i){
+            printf("@@");
+            for(int j = 0;j < cols-2;++j){
+                pos_map[i][j] = space; 
+                printf("%c",pos_map[i][j]);
+ 
             }
-            printf("\n");
-            //In_board game 
-            for(int i= 0;i<rows;++i){
-                printf("@@");
-                for(int j = 0;j < cols-2;++j){
-                    pos_map[i][j] = space; 
-                    printf("%c",pos_map[i][j]);
-                    
-                    pos_map[6][50] = '0';
-                    printf("%c",pos_map[i][j]);
-                    
-                }
-                
             printf("@@");
             printf("\n");
-            }
-    //cols down 
-            for(int col = 0 ;col < cols+2;++col){
-                printf("@");
-            }
-
-    //last show board game 
-            printf("\n");
-            get_key();
-            draw_player();
-           
-
-            
-            
-            
-            
-
-            printf("\n");
-
-
-            
-            system("cls");
-            
         }
-        
+    //cols down 
+        for(int col = 0 ;col < cols+2;++col){
+            printf("@");
+        }
+    //last show board game 
+        printf("\n");
+        pos_map[5][20] = 'X';
+        printf("\n");
+        system("cls");
+        Board_game();
+
     } 
 
     else{
