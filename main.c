@@ -1,12 +1,15 @@
 #include <stdio.h> 
 #include<conio.h>
 #include<windows.h>
+#include<time.h>
+
 #define rows 12
 #define cols 104
 
 
 int size =0 ;
 char pos_map[rows][cols] ;
+
 
 char character(){
     
@@ -40,34 +43,50 @@ char get_key(){
     
     switch(key){
         
-        case 'w':movement(0,-1); break;
-        case 's':movement(0,1); break;
-        case 'a':movement(-1,0); break;
-        case 'd':movement(1,0); break;
+        case 'w':
+            movement(0,-1);  
+            break;
+        case 's':
+            movement(0,1); 
+            break;
+        case 'a':
+            movement(-2,0); 
+            break;
+        case 'd':
+            movement(2,0); 
+            break;
         
     }
-   
     return key;
 
 }
-
-int x = 3,y = 5;
+int x = 3,y = 5,y_mon = -1;
+int random(int num){
+    
+    int random = rand()%num +1;
+    return random;
+}
 void draw_player(){
    
     pos_map[x][y] = 'X';
-    
     printf("\n%d %d \n",x,y);
-    return x,y;
+    return x, y;
               
+}
+void draw_monster(){
+    for(int i=0;i<=rows;++i){
+        pos_map[i][y_mon] = '$';
+    }
+    int space = random(rows);
+    pos_map[space][y_mon] = ' ';
 }
 
 void movement(int deltaY , int deltaX){
     y += deltaY;
     x += deltaX;
+    y_mon += 1;
     
 }
-
-
 
 char Board_game(){
 
@@ -78,11 +97,8 @@ char Board_game(){
     //In_board game 
     for(int i= 0;i<rows;++i){
         printf("@@");
-        
         for(int j = 0;j < cols-2;++j){
             printf("%c",pos_map[i][j]);
-            
-
         }
         
         printf("@@");
@@ -93,14 +109,13 @@ char Board_game(){
         printf("@");
     }
 }
-    
 
 int main(){
      
     //Variables
-    char player = character();
-    int True = 0,r=0;
+    int True = 0;
     int test ;
+    srand(time(NULL));
 
     system("cls");
     if(menu() == 1){
@@ -132,15 +147,16 @@ int main(){
        
         while(True = 1 ){
             
-            
             if(((x>= 0 ) && (x < rows)) && ((y>=0)&&(y < cols-2))){
                 get_key();
-                
+                draw_monster();
                 draw_player();
                 Board_game();
                 pos_map[x][y] = space ;
-                
-
+                //delete monster after player move  
+                for(int row=0;row<=rows;++row){
+                    pos_map[row][y_mon] = space;
+                }  
             }        
             else{ 
                 True = 0;
@@ -148,10 +164,8 @@ int main(){
                 break;
 
             }
-            printf(" %d",True);
         }
     } 
-
     else{
         system("cls");
     }
