@@ -34,13 +34,13 @@ int menu(){
     }
     return select;
 }
-int get_key(){
+char get_key(){
     int key = getch(); 
     
     switch(key){
         
-        case 'w':movement(0,1); break;
-        case 's':movement(0,-1); break;
+        case 'w':movement(0,-1); break;
+        case 's':movement(0,1); break;
         case 'a':movement(-1,0); break;
         case 'd':movement(1,0); break;
         
@@ -53,19 +53,18 @@ int playerX = 5;
 int playerY = 5;
 int x,y;
 void draw_player(){
-      
+   
+    pos_map[x][y] = 'X';
     
-    x += playerX; 
-    y += playerY;
     
     printf("%d %d \n",x,y);
-    
-      
+              
 }
 
 void movement(int deltaY , int deltaX){
-    playerY += deltaY;
-    playerX += deltaX;
+    y += deltaY;
+    x += deltaX;
+    
 }
 
 
@@ -129,10 +128,16 @@ int main(){
         }
     //last show board game 
         printf("\n");
-        pos_map[5][20] = 'X';
-        printf("\n");
-        system("cls");
-        Board_game();
+        if(x<=rows || y<=cols){
+            while(True == 1){
+                get_key();
+                draw_player();
+                Board_game();
+                
+            }
+            system("cls");
+        }        
+        
 
     } 
 
