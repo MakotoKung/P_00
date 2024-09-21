@@ -49,15 +49,15 @@ char get_key(){
     return key;
 
 }
-int playerX = 5;
-int playerY = 5;
-int x,y;
+
+int x = 3,y = 5;
 void draw_player(){
    
     pos_map[x][y] = 'X';
     
     
-    printf("%d %d \n",x,y);
+    printf("\n%d %d \n",x,y);
+    return x,y;
               
 }
 
@@ -128,17 +128,25 @@ int main(){
         }
     //last show board game 
         printf("\n");
-        if(x<=rows || y<=cols){
-            while(True == 1){
+        //movement player // start [3][5] 
+        while(True = 1 ){
+            
+            if((x>= 0 ) && ((y>=0) && (y < cols-2))){
                 get_key();
                 draw_player();
                 Board_game();
+                pos_map[x][y] = space ;
                 
-            }
-            system("cls");
-        }        
-        
 
+            }        
+            else{ 
+                True = 0;
+                printf("\nGame Over\n");
+                break;
+
+            }
+            printf(" %d",True);
+        }
     } 
 
     else{
