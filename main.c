@@ -1,5 +1,6 @@
 #include <stdio.h> 
 #include<conio.h>
+#include<windows.h>
 #define rows 12
 #define cols 104
 
@@ -55,7 +56,6 @@ void draw_player(){
    
     pos_map[x][y] = 'X';
     
-    
     printf("\n%d %d \n",x,y);
     return x,y;
               
@@ -80,7 +80,7 @@ char Board_game(){
         printf("@@");
         
         for(int j = 0;j < cols-2;++j){
-            printf("%c", pos_map[i][j]);
+            printf("%c",pos_map[i][j]);
             
 
         }
@@ -129,10 +129,13 @@ int main(){
     //last show board game 
         printf("\n");
         //movement player // start [3][5] 
+       
         while(True = 1 ){
             
-            if((x>= 0 ) && ((y>=0) && (y < cols-2))){
+            
+            if(((x>= 0 ) && (x < rows)) && ((y>=0)&&(y < cols-2))){
                 get_key();
+                
                 draw_player();
                 Board_game();
                 pos_map[x][y] = space ;
