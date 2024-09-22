@@ -38,6 +38,13 @@ int menu(){
     }
     return select;
 }
+int x = 3, y = 5, y_mon = -1;
+void movement(int deltaY , int deltaX){
+    y += deltaY;
+    x += deltaX;
+    y_mon += 1;
+    
+}
 char get_key(){
     int key = getch(); 
     
@@ -60,7 +67,7 @@ char get_key(){
     return key;
 
 }
-int x = 3,y = 5,y_mon = -1;
+
 int random(int num){
     
     int random = rand()%num +1;
@@ -70,7 +77,7 @@ void draw_player(){
    
     pos_map[x][y] = 'X';
     printf("\n%d %d \n",x,y);
-    return x, y;
+    
               
 }
 void draw_monster(){
@@ -81,12 +88,6 @@ void draw_monster(){
     pos_map[space][y_mon] = ' ';
 }
 
-void movement(int deltaY , int deltaX){
-    y += deltaY;
-    x += deltaX;
-    y_mon += 1;
-    
-}
 
 char Board_game(){
 
@@ -156,7 +157,10 @@ int main(){
                 //delete monster after player move  
                 for(int row=0;row<=rows;++row){
                     pos_map[row][y_mon] = space;
-                }  
+                }
+                  
+                
+                
             }        
             else{ 
                 True = 0;
