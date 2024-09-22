@@ -68,6 +68,7 @@ char get_key(){
 
 }
 
+
 int random(int num){
     
     int random = rand()%num +1;
@@ -153,11 +154,18 @@ int main(){
                 draw_monster();
                 draw_player();
                 Board_game();
+                //Check position to Game over 
+                if(y == y_mon){
+                    printf("\nOver ");
+                    True = 0;
+                    break;
+                }
                 pos_map[x][y] = space ;
                 //delete monster after player move  
                 for(int row=0;row<=rows;++row){
                     pos_map[row][y_mon] = space;
                 }
+                
                   
                 
                 
