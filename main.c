@@ -38,11 +38,12 @@ int menu(){
     }
     return select;
 }
-int x = 3, y = 5, y_mon = -1;
+int x = 3, y = 5, y_mon = -1,y_new =90;
 void movement(int deltaY , int deltaX){
     y += deltaY;
     x += deltaX;
     y_mon += 1;
+    y_new -= 1;
     
 }
 char get_key(){
@@ -62,12 +63,9 @@ char get_key(){
         case 'd':
             movement(2,0); 
             break;
-        
     }
     return key;
-
 }
-
 
 int random(int num){
     
@@ -78,15 +76,22 @@ void draw_player(){
    
     pos_map[x][y] = 'X';
     printf("\n%d %d \n",x,y);
-    
               
 }
 void draw_monster(){
     for(int i=0;i<=rows;++i){
         pos_map[i][y_mon] = '$';
     }
-    int space = random(rows);
+
+    if(y>= 44){
+        for(int i=0;i<=rows;++i){
+            pos_map[i][y_new] = '$';
+        }
+    }
+    int space = random(rows-1);
     pos_map[space][y_mon] = ' ';
+    pos_map[space][y_new] = ' ';
+    
 }
 
 char Board_game(){
@@ -151,8 +156,10 @@ int main(){
                 get_key();
                 draw_monster();
                 draw_player();
+                
                 Board_game();
                 //if want monster ever move use time 
+
                 //Check position to Game over 
                 if(y == y_mon){
                     printf("\nGame Over\n");
@@ -162,8 +169,12 @@ int main(){
 
                 //deleta player and monster 
                 pos_map[x][y] = space ;
+                //fix 
                 for(int row=0;row<=rows;++row){
                     pos_map[row][y_mon] = space;
+                }
+                for(int row=0;row<=rows;++row){
+                    pos_map[row][y_new] = space;
                 }
 
             }        
