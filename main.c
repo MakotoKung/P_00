@@ -161,7 +161,7 @@ int main(){
                 //if want monster ever move use time 
 
                 //Check position to Game over 
-                if(y == y_mon){
+                if(y == y_mon || y == y_new){
                     printf("\nGame Over\n");
                     True = 0;
                     break;
