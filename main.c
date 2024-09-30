@@ -1,4 +1,4 @@
-#include <stdio.h> 
+#include<stdio.h> 
 #include<conio.h>
 #include<windows.h>
 #include<time.h>
@@ -6,17 +6,9 @@
 #define rows 12
 #define cols 104
 
-
 int size =0 ;
 char pos_map[rows][cols] ;
 
-
-char character(){
-    
-    printf("o\n");
-    printf(" /|\\ \n");
-    printf(" / \\ ");
-}
 int menu(){
     int select ; 
     printf(" pew pew monsters \n------------\n");
@@ -78,22 +70,17 @@ void draw_player(){
     printf("\n%d %d \n",x,y);
               
 }
+
 void draw_monster(){
     for(int i=0;i<=rows;++i){
         pos_map[i][y_mon] = '$';
     }
-
     if(y>= 44){
         for(int i=0;i<=rows;++i){
             pos_map[i][y_new] = '$';
         }
     }
-    int space = random(rows-1);
-    pos_map[space][y_mon] = ' ';
-    pos_map[space][y_new] = ' ';
-    
 }
-
 char Board_game(){
 
     for(int col = 0;col < cols+2;++col){
@@ -126,6 +113,7 @@ int main(){
     if(menu() == 1){
         True = 1;
         char space = ' ';
+        
     //Show Board game 
         for(int col = 0;col < cols+2;++col){
             printf("@");
@@ -149,15 +137,29 @@ int main(){
     //last show board game 
         printf("\n");
         //movement player // start [3][5] 
-       
+        int space_m = random(rows-1);
+        int space_n;
+        if (y>= 44){
+            space_n = random(rows-1);
+        }
+        else if (y<44){
+            space_n = space_n;
+        }
         while(True = 1 ){
             
             if(((x>= 0 ) && (x < rows)) && ((y>=0)&&(y < cols-2))){
                 get_key();
                 draw_monster();
+                pos_map[space_m][y_mon] = ' ';
+                pos_map[space_n][y_new] = ' ';
                 draw_player();
-                
                 Board_game();
+                for(int i=0;i<=rows;++i){
+                    pos_map[i][y_mon] = '$';
+                }
+                for(int i=0;i<=rows;++i){
+                    pos_map[i][y_new] = '$';
+                }
                 //if want monster ever move use time 
 
                 //Check position to Game over 
