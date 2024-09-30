@@ -89,7 +89,6 @@ void draw_monster(){
     pos_map[space][y_mon] = ' ';
 }
 
-
 char Board_game(){
 
     for(int col = 0;col < cols+2;++col){
@@ -118,7 +117,6 @@ int main(){
     int True = 0;
     int test ;
     srand(time(NULL));
-
     system("cls");
     if(menu() == 1){
         True = 1;
@@ -154,22 +152,22 @@ int main(){
                 draw_monster();
                 draw_player();
                 Board_game();
+                //if want monster ever move use time 
                 //Check position to Game over 
                 if(y == y_mon){
-                    printf("\nOver ");
+                    printf("\nGame Over\n");
                     True = 0;
                     break;
                 }
+
+                //deleta player and monster 
                 pos_map[x][y] = space ;
-                //delete monster after player move  
                 for(int row=0;row<=rows;++row){
                     pos_map[row][y_mon] = space;
                 }
-                
-                  
-                
-                
+
             }        
+            //if move exit a frame
             else{ 
                 True = 0;
                 printf("\nGame Over\n");
