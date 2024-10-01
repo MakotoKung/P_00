@@ -2,9 +2,9 @@
 #include<conio.h>
 #include<windows.h>
 #include<time.h>
-
 #define rows 12
 #define cols 104
+
 int size =0 ;
 char pos_map[rows][cols] ;
 
@@ -91,7 +91,6 @@ char Board_game(){
         for(int j = 0;j < cols-2;++j){
             printf("%c",pos_map[i][j]);
         }
-        
         printf("@@");
         printf("\n");
     }
@@ -123,7 +122,6 @@ int main(){
             for(int j = 0;j < cols-2;++j){
                 pos_map[i][j] = space; 
                 printf("%c",pos_map[i][j]);
- 
             }
             printf("@@");
             printf("\n");
