@@ -135,6 +135,7 @@ int main(){
         //movement player // start [3][5] 
         int space_m = random(rows-1);
         int space_n;
+      
         if (y>= 44){
             space_n = random(rows-1);
         }
@@ -158,7 +159,7 @@ int main(){
                 }
                 //fix 
                 //if monster exit the frame delete monster and make new
-
+                
                 //Check position to Game over 
                 if((x != space_m && y == y_mon )|| (x != space_n && y == y_new)){
                     printf("\nGame Over\n");
@@ -168,13 +169,13 @@ int main(){
 
                 //deleta player and monster 
                 pos_map[x][y] = space ;
-                //fix 
                 for(int row=0;row<=rows;++row){
                     pos_map[row][y_mon] = space;
                 }
                 for(int row=0;row<=rows;++row){
                     pos_map[row][y_new] = space;
                 }
+                
 
             }        
             //if player move exit a frame
