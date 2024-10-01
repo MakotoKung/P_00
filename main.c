@@ -5,7 +5,6 @@
 
 #define rows 12
 #define cols 104
-
 int size =0 ;
 char pos_map[rows][cols] ;
 
@@ -36,7 +35,6 @@ void movement(int deltaY , int deltaX){
     x += deltaX;
     y_mon += 1;
     y_new -= 1;
-    
 }
 char get_key(){
     int key = getch(); 
@@ -160,10 +158,11 @@ int main(){
                 for(int i=0;i<=rows;++i){
                     pos_map[i][y_new] = '$';
                 }
-                //if want monster ever move use time 
+                //fix 
+                //if monster exit the frame delete monster and make new
 
                 //Check position to Game over 
-                if(y == y_mon || y == y_new){
+                if((x != space_m && y == y_mon )|| (x != space_n && y == y_new)){
                     printf("\nGame Over\n");
                     True = 0;
                     break;
@@ -180,7 +179,7 @@ int main(){
                 }
 
             }        
-            //if move exit a frame
+            //if player move exit a frame
             else{ 
                 True = 0;
                 printf("\nGame Over\n");
