@@ -8,8 +8,9 @@
 int size =0 ;
 char pos_map[rows][cols] ;
 
+
 int menu(){
-    int select ; 
+    int select; 
     printf(" pew pew monsters \n------------\n");
     printf(" 1.Start Game\n");
     printf(" 2.Exit\n");
@@ -24,17 +25,20 @@ int menu(){
     case 2: 
         return 0 ;
         break;
+
     default:
         break;
     }
     return select;
 }
-int x = 3, y = 5, y_mon = -1,y_new =90;
+int x = 3, y = 5, y_mon = -1,y_new =56;
 void movement(int deltaY , int deltaX){
     y += deltaY;
     x += deltaX;
     y_mon += 1;
-    y_new -= 1;
+    if(y>44){
+        y_new -= 1;
+    }
 }
 char get_key(){
     int key = getch(); 
@@ -105,13 +109,14 @@ int main(){
      
     //Variables
     int True = 0;
+    
     int test ;
     srand(time(NULL));
     system("cls");
+    
     if(menu() == 1){
         True = 1;
         char space = ' ';
-        
         
     //Show Board game 
         for(int col = 0;col < cols+2;++col){
@@ -139,8 +144,6 @@ int main(){
         int space_m = random(rows-1);
         int space_n,n=0;
 
-        
-        
         while(True = 1 ){
             
             if(((x>= 0 ) && (x < rows)) && ((y>=0)&&(y < cols-2))){
@@ -151,22 +154,24 @@ int main(){
                 draw_player();
                 Board_game();
                 printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
-                printf("%d ",y_mon);
-               
+                printf("%d %d",y_mon,y_new);
                 
-                //fix 
                 //if monster exit the frame delete monster and make new
+                //random new spawn
                 if(y_mon>=cols-2){
-                    y_mon = random(cols-6);
+                   int new = y;
+                   y_mon = new-random(7);
                 }
-                
+                else if(y_new <0){
+                    y_new = random(17)+y;
+                }
                 //Check position to Game over 
-                if((x != space_m && y == y_mon )|| (x != space_n && y == y_new)){
+                if((x != space_m && y == y_mon ) || (x != space_n && y == y_new)){
                     printf("\nGame Over\n");
+                    printf("1\n");
                     True = 0;
                     break;
                 }
-
                 //deleta player and monster 
                 pos_map[x][y] = space ;
                 for(int row=0;row<=rows;++row){
@@ -175,7 +180,14 @@ int main(){
                 for(int row=0;row<=rows;++row){
                     pos_map[row][y_new] = space;
                 }
-            } 
+            }
+            //if player move exit a frame
+            else{ 
+                printf("\nGame Over\n");
+                True = 0;
+                break;
+
+            }
             //random when spawn new_monster    
             if(n!=1){
                 if (y> 44){
@@ -188,14 +200,6 @@ int main(){
                     n=0;
                     space_n = random(rows-1);
                 }
-            } 
-
-            //if player move exit a frame
-            else{ 
-                True = 0;
-                printf("\nGame Over\n");
-                break;
-
             }
         }
     } 

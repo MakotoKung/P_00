@@ -1,2 +1,2 @@
 
-    for(int i=0;i<=rows;++i){
+                else if(y_new <0){
