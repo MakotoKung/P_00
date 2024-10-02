@@ -65,18 +65,15 @@ int random(int num){
 void draw_player(){
    
     pos_map[x][y] = 'X';
-    printf("\n%d %d \n",x,y);
+    printf("\n\n%d %d\n",x,y);
               
 }
 
 void draw_monster(){
     
-    if(y>=4){
-        for(int i=0;i<=rows;++i){
-            pos_map[i][y_mon] = '$';
-        }
+    for(int i=0;i<=rows;++i){
+        pos_map[i][y_mon] = '$';
     }
-    
     if(y>= 44){
         for(int i=0;i<=rows;++i){
             pos_map[i][y_new] = 'l';
@@ -115,6 +112,7 @@ int main(){
         True = 1;
         char space = ' ';
         
+        
     //Show Board game 
         for(int col = 0;col < cols+2;++col){
             printf("@");
@@ -138,21 +136,11 @@ int main(){
     //last show board game 
         printf("\n");
         //movement player // start [3][5] 
-        int space_m ;
-        int space_n;
-        if(y>= 4){
-            space_m = random(rows-1);
-        }
-        else if(y<5){
-            space_m = space_m;
-        }
-      
-        if (y>= 44){
-            space_n = random(rows-1);
-        }
-        else if (y<44){
-            space_n = space_n;
-        }
+        int space_m = random(rows-1);
+        int space_n,n=0;
+
+        
+        
         while(True = 1 ){
             
             if(((x>= 0 ) && (x < rows)) && ((y>=0)&&(y < cols-2))){
@@ -162,9 +150,15 @@ int main(){
                 pos_map[space_n][y_new] = ' ';
                 draw_player();
                 Board_game();
+                printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
+                printf("%d ",y_mon);
+               
                 
                 //fix 
                 //if monster exit the frame delete monster and make new
+                if(y_mon>=cols-2){
+                    y_mon = random(cols-6);
+                }
                 
                 //Check position to Game over 
                 if((x != space_m && y == y_mon )|| (x != space_n && y == y_new)){
@@ -181,9 +175,21 @@ int main(){
                 for(int row=0;row<=rows;++row){
                     pos_map[row][y_new] = space;
                 }
-                
+            } 
+            //random when spawn new_monster    
+            if(n!=1){
+                if (y> 44){
+                    n=1 ;
+                    space_n = random(rows-1);
+                }
+            }
+            else if (n=1){
+                if(y<44){
+                    n=0;
+                    space_n = random(rows-1);
+                }
+            } 
 
-            }        
             //if player move exit a frame
             else{ 
                 True = 0;
