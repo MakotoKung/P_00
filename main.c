@@ -70,12 +70,16 @@ void draw_player(){
 }
 
 void draw_monster(){
-    for(int i=0;i<=rows;++i){
-        pos_map[i][y_mon] = '$';
+    
+    if(y>=4){
+        for(int i=0;i<=rows;++i){
+            pos_map[i][y_mon] = '$';
+        }
     }
+    
     if(y>= 44){
         for(int i=0;i<=rows;++i){
-            pos_map[i][y_new] = '$';
+            pos_map[i][y_new] = 'l';
         }
     }
 }
@@ -122,6 +126,7 @@ int main(){
             for(int j = 0;j < cols-2;++j){
                 pos_map[i][j] = space; 
                 printf("%c",pos_map[i][j]);
+                
             }
             printf("@@");
             printf("\n");
@@ -133,8 +138,14 @@ int main(){
     //last show board game 
         printf("\n");
         //movement player // start [3][5] 
-        int space_m = random(rows-1);
+        int space_m ;
         int space_n;
+        if(y>= 4){
+            space_m = random(rows-1);
+        }
+        else if(y<5){
+            space_m = space_m;
+        }
       
         if (y>= 44){
             space_n = random(rows-1);
@@ -151,12 +162,7 @@ int main(){
                 pos_map[space_n][y_new] = ' ';
                 draw_player();
                 Board_game();
-                for(int i=0;i<=rows;++i){
-                    pos_map[i][y_mon] = '$';
-                }
-                for(int i=0;i<=rows;++i){
-                    pos_map[i][y_new] = '$';
-                }
+                
                 //fix 
                 //if monster exit the frame delete monster and make new
                 
