@@ -69,7 +69,6 @@ int random(int num){
     return random;
 }
 void draw_player(){
-   
     pos_map[x][y] = 'X';
     printf("\n\n%d %d\n",x,y);
               
@@ -85,9 +84,10 @@ void draw_monster(){
             pos_map[i][y_new] = 'l';
         }
     }
+    
 }
 char Board_game(){
-
+    printf("\033[0;34m");//change font color 
     for(int col = 0;col < cols+2;++col){
         printf("@");
     }
@@ -95,9 +95,11 @@ char Board_game(){
     //In_board game 
     for(int i= 0;i<rows;++i){
         printf("@@");
+        printf("\033[0m"); // set defult
         for(int j = 0;j < cols-2;++j){
             printf("%c",pos_map[i][j]);
         }
+        printf("\033[0;34m"); //set color 
         printf("@@");
         printf("\n");
     }
@@ -105,6 +107,7 @@ char Board_game(){
     for(int col = 0 ;col < cols+2;++col){
         printf("@");
     }
+    printf("\033[0m");//set defult 
 }
 
 int main(){
@@ -155,7 +158,9 @@ int main(){
                 pos_map[space_m][y_mon] = ' ';
                 pos_map[space_n][y_new] = ' ';
                 draw_player();
-                printf("Score : %d\n",score);
+                printf("\033[0;33m"); // change font color
+                printf("SCORE : %d\n",score);
+                printf("\033[0m"); // set defult color code 
                 Board_game();
                 //printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
                 //printf("%d %d",y_mon,y_new);
@@ -171,8 +176,13 @@ int main(){
                 }
                 //Check position to Game over 
                 if((x != space_m && y == y_mon ) || (x != space_n && y == y_new)){
+                    printf("\033[0;33m"); // change font color
                     printf("\nSCORE : %d \n",score);
-                    printf("Game Over\n  ");
+                    printf("\033[0m"); // set defult color code 
+                    
+                    printf("\033[3;31m"); // set red color 
+                    printf("GAME OVER \n  ");
+                    printf("\033[0m"); // set defult
                     True = 0;
                     break;
                 }
@@ -187,8 +197,13 @@ int main(){
             }
             //if player move exit a frame
             else{ 
-                printf("SCORE : %d \n",score);
-                printf("\nGame Over\n");
+               printf("\033[0;33m"); // change font color
+                printf("\nSCORE : %d \n",score);
+                printf("\033[0m"); // set defult color code 
+                
+                printf("\033[3;31m"); // set red color 
+                printf("GAME OVER \n  ");
+                printf("\033[0m"); // set defult
                 True = 0;
                 break;
 
