@@ -6,7 +6,7 @@
 #define cols 104
 
 int size =0 ;
-char pos_map[rows][cols] ;
+char pos_map[rows][cols] ; 
 
 
 int menu(){
@@ -46,16 +46,18 @@ char get_key(){
     switch(key){
         
         case 'w':
-            movement(0,-1);  
+            movement(0,-1);
             break;
         case 's':
-            movement(0,1); 
+            movement(0,1);
             break;
         case 'a':
             movement(-2,0); 
             break;
         case 'd':
-            movement(2,0); 
+            movement(2,0);
+            break;
+        default:
             break;
     }
     return key;
@@ -109,16 +111,16 @@ int main(){
      
     //Variables
     int True = 0;
-    
     int test ;
     srand(time(NULL));
     system("cls");
     
+    //everthing in game should in if menu() ==1 ;
     if(menu() == 1){
         True = 1;
         char space = ' ';
         
-    //Show Board game 
+        //Show Board game 
         for(int col = 0;col < cols+2;++col){
             printf("@");
         }
@@ -129,32 +131,34 @@ int main(){
             for(int j = 0;j < cols-2;++j){
                 pos_map[i][j] = space; 
                 printf("%c",pos_map[i][j]);
-                
             }
             printf("@@");
             printf("\n");
         }
-    //cols down 
+        //cols down 
         for(int col = 0 ;col < cols+2;++col){
             printf("@");
         }
-    //last show board game 
+        //last show board game 
         printf("\n");
         //movement player // start [3][5] 
         int space_m = random(rows-1);
         int space_n,n=0;
+        int score=0;
 
         while(True = 1 ){
             
             if(((x>= 0 ) && (x < rows)) && ((y>=0)&&(y < cols-2))){
-                get_key();
+                get_key(); 
+                score += 1;
                 draw_monster();
                 pos_map[space_m][y_mon] = ' ';
                 pos_map[space_n][y_new] = ' ';
                 draw_player();
+                printf("Score : %d\n",score);
                 Board_game();
-                printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
-                printf("%d %d",y_mon,y_new);
+                //printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
+                //printf("%d %d",y_mon,y_new);
                 
                 //if monster exit the frame delete monster and make new
                 //random new spawn
@@ -167,8 +171,8 @@ int main(){
                 }
                 //Check position to Game over 
                 if((x != space_m && y == y_mon ) || (x != space_n && y == y_new)){
-                    printf("\nGame Over\n");
-                    printf("1\n");
+                    printf("\nSCORE : %d \n",score);
+                    printf("Game Over\n  ");
                     True = 0;
                     break;
                 }
@@ -183,6 +187,7 @@ int main(){
             }
             //if player move exit a frame
             else{ 
+                printf("SCORE : %d \n",score);
                 printf("\nGame Over\n");
                 True = 0;
                 break;
