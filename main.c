@@ -162,8 +162,8 @@ int main(){
                 printf("SCORE : %d\n",score);
                 printf("\033[0m"); // set defult color code 
                 Board_game();
-                //printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
-                //printf("%d %d",y_mon,y_new);
+            //printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
+            //printf("%d %d",y_mon,y_new);
                 
                 //if monster exit the frame delete monster and make new
                 //random new spawn
