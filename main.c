@@ -13,7 +13,8 @@ int menu(){
     int select; 
     printf(" pew pew monsters \n------------\n");
     printf(" 1.Start Game\n");
-    printf(" 2.Exit\n");
+    printf(" 2.Description\n");
+    printf(" 3.Exit\n");
     printf("Enter you select (1-2):");
     scanf("%d",&select);
     switch (select)
@@ -23,7 +24,10 @@ int menu(){
         break;
     
     case 2: 
-        return 0 ;
+        
+        break;
+    case 3:
+        return 0;
         break;
 
     default:
@@ -109,74 +113,116 @@ char Board_game(){
     }
     printf("\033[0m");//set defult 
 }
+int New_game(int start ){
+    char y; 
+    if(start == 0){
+        printf("Do you want a play :");
+        scanf("%s",y);
+        if(y == 'y'){
+            start =1 ;
+        }
+    }
+    return start ;
+}
 
 int main(){
      
     //Variables
     int True = 0;
-    int test ;
-    srand(time(NULL));
+    int start =0 ;
     system("cls");
-    
-    //everthing in game should in if menu() ==1 ;
-    if(menu() == 1){
-        True = 1;
-        char space = ' ';
+    int select = menu();
+    srand(time(NULL));
+    while(select != 1){
+        if(select == 2){
+            system("cls");
+            printf("--------------------------------------------------\n");
+            printf("This game is a run 'X' \nwith 'w' 'a' 's' 'd' but don't touch '$' or 'l'\n");
+            printf("--------------------------------------------------\n\n");
+        }
         
-        //Show Board game 
-        for(int col = 0;col < cols+2;++col){
-            printf("@");
-        }
-        printf("\n");
-        //In_board game 
-        for(int i= 0;i<rows;++i){
-            printf("@@");
-            for(int j = 0;j < cols-2;++j){
-                pos_map[i][j] = space; 
-                printf("%c",pos_map[i][j]);
-            }
-            printf("@@");
-            printf("\n");
-        }
-        //cols down 
-        for(int col = 0 ;col < cols+2;++col){
-            printf("@");
-        }
-        //last show board game 
-        printf("\n");
-        //movement player // start [3][5] 
-        int space_m = random(rows-1);
-        int space_n,n=0;
-        int score=0;
-
-        while(True = 1 ){
+        //everthing in game should in if menu() ==1 ;
+        if(menu() == 1){
+            True = 1;
+        
+            char space = ' ';
             
-            if(((x>= 0 ) && (x < rows)) && ((y>=0)&&(y < cols-2))){
-                get_key(); 
-                score += 1;
-                draw_monster();
-                pos_map[space_m][y_mon] = ' ';
-                pos_map[space_n][y_new] = ' ';
-                draw_player();
-                printf("\033[0;33m"); // change font color
-                printf("SCORE : %d\n",score);
-                printf("\033[0m"); // set defult color code 
-                Board_game();
-            //printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
-            //printf("%d %d",y_mon,y_new);
+            //Show Board game 
+            for(int col = 0;col < cols+2;++col){
+                printf("@");
+            }
+            printf("\n");
+            //In_board game 
+            for(int i= 0;i<rows;++i){
+                printf("@@");
+                for(int j = 0;j < cols-2;++j){
+                    pos_map[i][j] = space; 
+                    printf("%c",pos_map[i][j]);
+                }
+                printf("@@");
+                printf("\n");
+            }
+            //cols down 
+            for(int col = 0 ;col < cols+2;++col){
+                printf("@");
+            }
+            //last show board game 
+            printf("\n");
+            //movement player // start [3][5] 
+            int space_m = random(rows-1);
+            int space_n,n=0;
+            int score=0;
+
+            while(True = 1 ){
                 
-                //if monster exit the frame delete monster and make new
-                //random new spawn
-                if(y_mon>=cols-2){
-                   int new = y;
-                   y_mon = new-random(7);
-                }
-                else if(y_new <0){
-                    y_new = random(17)+y;
-                }
-                //Check position to Game over 
-                if((x != space_m && y == y_mon ) || (x != space_n && y == y_new)){
+                if(((x>= 0 ) && (x < rows)) && ((y>=0)&&(y < cols-2))){
+                    get_key(); 
+                    score += 1;
+                    draw_monster();
+                    pos_map[space_m][y_mon] = ' ';
+                    pos_map[space_n][y_new] = ' ';
+                    draw_player();
                     printf("\033[0;33m"); // change font color
+                    printf("SCORE : %d\n",score);
+                    printf("\033[0m"); // set defult color code 
+                    Board_game();
+                //printf("\nspace_m :%d space_n :%d x: %d y: %d\n",space_m,space_n,x,y);
+                //printf("%d %d",y_mon,y_new);
+                    
+                    //if monster exit the frame delete monster and make new
+                    //random new spawn
+                    if(y_mon>=cols-2){
+                    int new = y;
+                    y_mon = new-random(7);
+                    }
+                    else if(y_new <0){
+                        y_new = random(17)+y;
+                    }
+                    //Check position to Game over 
+                    if((x != space_m && y == y_mon ) || (x != space_n && y == y_new)){
+                        printf("\033[0;33m"); // change font color
+                        printf("\nSCORE : %d \n",score);
+                        printf("\033[0m"); // set defult color code 
+                        
+                        printf("\033[3;31m"); // set red color 
+                        printf("GAME OVER \n  ");
+                        printf("\033[0m"); // set defult
+                        True = 0;
+                        break;
+                        
+                    }
+                    //deleta player and monster 
+                    pos_map[x][y] = space ;
+                    for(int row=0;row<=rows;++row){
+                        pos_map[row][y_mon] = space;
+                    }
+                    for(int row=0;row<=rows;++row){
+                        pos_map[row][y_new] = space;
+                    }
+                }
+                //if player move exit a frame
+                else{ 
+                printf("\033[0;33m"); // change font color
                     printf("\nSCORE : %d \n",score);
                     printf("\033[0m"); // set defult color code 
                     
@@ -185,47 +231,27 @@ int main(){
                     printf("\033[0m"); // set defult
                     True = 0;
                     break;
+                    
                 }
-                //deleta player and monster 
-                pos_map[x][y] = space ;
-                for(int row=0;row<=rows;++row){
-                    pos_map[row][y_mon] = space;
+                //random when spawn new_monster    
+                if(n!=1){
+                    if (y> 44){
+                        n=1 ;
+                        space_n = random(rows-1);
+                    }
                 }
-                for(int row=0;row<=rows;++row){
-                    pos_map[row][y_new] = space;
+                else if (n=1){
+                    if(y<44){
+                        n=0;
+                        space_n = random(rows-1);
+                    }
                 }
-            }
-            //if player move exit a frame
-            else{ 
-               printf("\033[0;33m"); // change font color
-                printf("\nSCORE : %d \n",score);
-                printf("\033[0m"); // set defult color code 
-                
-                printf("\033[3;31m"); // set red color 
-                printf("GAME OVER \n  ");
-                printf("\033[0m"); // set defult
-                True = 0;
-                break;
-
-            }
-            //random when spawn new_monster    
-            if(n!=1){
-                if (y> 44){
-                    n=1 ;
-                    space_n = random(rows-1);
+                else{
+                    system("cls");
                 }
             }
-            else if (n=1){
-                if(y<44){
-                    n=0;
-                    space_n = random(rows-1);
-                }
-            }
-        }
-    } 
-    else{
-        system("cls");
-    }
     return 0;
-}
+    }
+    }}
+
 
